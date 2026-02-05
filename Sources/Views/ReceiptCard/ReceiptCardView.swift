@@ -12,17 +12,20 @@ struct ReceiptCardView: View {
     let isAnonymized: Bool
     let streakDays: Int
     let isExportMode: Bool
-    
+    var maxWidth: CGFloat?
+
     init(
         receipt: DailyReceipt,
         isAnonymized: Bool = false,
         streakDays: Int = 1,
-        isExportMode: Bool = false
+        isExportMode: Bool = false,
+        maxWidth: CGFloat? = nil
     ) {
         self.receipt = receipt
         self.isAnonymized = isAnonymized
         self.streakDays = streakDays
         self.isExportMode = isExportMode
+        self.maxWidth = maxWidth
     }
 
     var body: some View {
@@ -32,10 +35,10 @@ struct ReceiptCardView: View {
                 PerforatedEdge()
                     .padding(.bottom, -3)
             }
-            
+
             VStack(alignment: .leading, spacing: 0) {
                 Spacer().frame(height: 20)
-                
+
                 ReceiptHeaderView(
                     date: receipt.date,
                     mode: receipt.mode,
@@ -74,18 +77,18 @@ struct ReceiptCardView: View {
                 Spacer().frame(height: 16)
 
                 ReceiptFooterView(streakDays: streakDays)
-                
+
                 Spacer().frame(height: 20)
             }
             .padding(.horizontal, 24)
-            
+
             // Perforated bottom
             if isExportMode {
                 PerforatedEdge()
                     .padding(.top, -3)
             }
         }
-        .frame(width: 375)
+        .frame(maxWidth: maxWidth ?? .infinity)
         .background(
             ZStack {
                 Color.receiptBackground
@@ -98,17 +101,99 @@ struct ReceiptCardView: View {
                     startPoint: .top,
                     endPoint: .bottom
                 )
+
+                // Paper texture (only in non-export mode for performance)
+                if !isExportMode {
+                    PaperTextureOverlay()
+                }
             }
         )
-        .clipShape(RoundedRectangle(cornerRadius: isExportMode ? 0 : 8))
+        .clipShape(RoundedRectangle(cornerRadius: isExportMode ? 0 : 12))
         .receiptShadow()
+    }
+}
+
+// MARK: - Paper Texture Overlay
+
+/// A subtle paper texture overlay using Canvas for a premium feel
+struct PaperTextureOverlay: View {
+    var body: some View {
+        Canvas { context, size in
+            // Create a subtle noise pattern with diagonal grain
+            let seed = 42 // Fixed seed for deterministic rendering
+            var rng = SeededRandomNumberGenerator(seed: UInt64(seed))
+
+            // Subtle diagonal lines for paper grain
+            for i in stride(from: 0, to: Int(size.width + size.height), by: 8) {
+                let startX = CGFloat(i)
+                let startY: CGFloat = 0
+                let endX: CGFloat = 0
+                let endY = CGFloat(i)
+
+                var path = Path()
+                path.move(to: CGPoint(x: startX, y: startY))
+                path.addLine(to: CGPoint(x: endX, y: endY))
+
+                let opacity = Double.random(in: 0.01...0.02, using: &rng)
+                context.stroke(
+                    path,
+                    with: .color(Color.black.opacity(opacity)),
+                    lineWidth: 0.5
+                )
+            }
+
+            // Sparse dots for texture
+            for _ in 0..<80 {
+                let x = CGFloat.random(in: 0...size.width, using: &rng)
+                let y = CGFloat.random(in: 0...size.height, using: &rng)
+                let opacity = Double.random(in: 0.015...0.035, using: &rng)
+                let dotSize = CGFloat.random(in: 0.5...1.5, using: &rng)
+
+                context.fill(
+                    Path(ellipseIn: CGRect(x: x, y: y, width: dotSize, height: dotSize)),
+                    with: .color(Color.black.opacity(opacity))
+                )
+            }
+        }
+        .allowsHitTesting(false)
+    }
+}
+
+// MARK: - Seeded Random Number Generator
+
+/// A simple seeded random number generator for deterministic texture rendering
+struct SeededRandomNumberGenerator: RandomNumberGenerator {
+    private var state: UInt64
+
+    init(seed: UInt64) {
+        self.state = seed
+    }
+
+    mutating func next() -> UInt64 {
+        // Simple xorshift algorithm
+        state ^= state << 13
+        state ^= state >> 7
+        state ^= state << 17
+        return state
     }
 }
 
 #Preview {
     ScrollView {
-        ReceiptCardView(receipt: SeedData.coffeeAddict, streakDays: 5)
-            .padding()
+        VStack(spacing: 20) {
+            ReceiptCardView(
+                receipt: SeedData.coffeeAddict,
+                streakDays: 5,
+                maxWidth: 375
+            )
+
+            ReceiptCardView(
+                receipt: SeedData.coffeeAddict,
+                streakDays: 5,
+                maxWidth: 320
+            )
+        }
+        .padding()
     }
-    .background(Color.gray.opacity(0.15))
+    .background(Color.appBackground)
 }

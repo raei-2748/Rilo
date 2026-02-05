@@ -12,37 +12,37 @@
 			containerPortal = 717A13A52F2EFF5300A78310 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 717A13AC2F2EFF5300A78310;
-			remoteInfo = "Rilo";
+			remoteInfo = Rilo;
 		};
 		717A13C52F2EFF5500A78310 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 717A13A52F2EFF5300A78310 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 717A13AC2F2EFF5300A78310;
-			remoteInfo = "Rilo";
+			remoteInfo = Rilo;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		717A13AD2F2EFF5300A78310 /* Rilo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rilo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		717A13BA2F2EFF5500A78310 /* RiloTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RiloTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		717A13C42F2EFF5500A78310 /* RiloUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RiloUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		717A13AD2F2EFF5300A78310 /* Rilo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rilo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		717A13BA2F2EFF5500A78310 /* RiloTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RiloTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		717A13C42F2EFF5500A78310 /* RiloUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RiloUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		717A13AF2F2EFF5300A78310 /* Rilo */ = {
+		717A13AF2F2EFF5300A78310 /* Sources */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Sources";
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		717A13BD2F2EFF5500A78310 /* RiloTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "RiloTests";
+			path = RiloTests;
 			sourceTree = "<group>";
 		};
 		717A13C72F2EFF5500A78310 /* RiloUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "RiloUITests";
+			path = RiloUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,7 +75,7 @@
 		717A13A42F2EFF5300A78310 = {
 			isa = PBXGroup;
 			children = (
-				717A13AF2F2EFF5300A78310 /* Rilo */,
+				717A13AF2F2EFF5300A78310 /* Sources */,
 				717A13BD2F2EFF5500A78310 /* RiloTests */,
 				717A13C72F2EFF5500A78310 /* RiloUITests */,
 				717A13AE2F2EFF5300A78310 /* Products */,
@@ -108,12 +108,12 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				717A13AF2F2EFF5300A78310 /* Rilo */,
+				717A13AF2F2EFF5300A78310 /* Sources */,
 			);
-			name = "Rilo";
+			name = Rilo;
 			packageProductDependencies = (
 			);
-			productName = "Rilo";
+			productName = Rilo;
 			productReference = 717A13AD2F2EFF5300A78310 /* Rilo.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -133,10 +133,10 @@
 			fileSystemSynchronizedGroups = (
 				717A13BD2F2EFF5500A78310 /* RiloTests */,
 			);
-			name = "RiloTests";
+			name = RiloTests;
 			packageProductDependencies = (
 			);
-			productName = "RiloTests";
+			productName = RiloTests;
 			productReference = 717A13BA2F2EFF5500A78310 /* RiloTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -156,10 +156,10 @@
 			fileSystemSynchronizedGroups = (
 				717A13C72F2EFF5500A78310 /* RiloUITests */,
 			);
-			name = "RiloUITests";
+			name = RiloUITests;
 			packageProductDependencies = (
 			);
-			productName = "RiloUITests";
+			productName = RiloUITests;
 			productReference = 717A13C42F2EFF5500A78310 /* RiloUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -514,7 +514,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Rilo";
+				TEST_TARGET_NAME = Rilo;
 			};
 			name = Debug;
 		};
@@ -534,7 +534,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Rilo";
+				TEST_TARGET_NAME = Rilo;
 			};
 			name = Release;
 		};

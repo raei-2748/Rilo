@@ -7,32 +7,32 @@
 
 import SwiftUI
 
-// MARK: - Color Palette
+// MARK: - Receipt Color Palette (derived from BrandColors)
 
 extension Color {
-    /// Cream/off-white receipt background
-    static let receiptBackground = Color(red: 0.98, green: 0.97, blue: 0.94)
-    
-    /// Darker paper tone for depth
-    static let receiptPaper = Color(red: 0.95, green: 0.93, blue: 0.89)
-    
-    /// Primary text color (rich black)
-    static let receiptText = Color(red: 0.12, green: 0.12, blue: 0.12)
-    
-    /// Secondary text color
-    static let receiptSecondary = Color(red: 0.35, green: 0.35, blue: 0.35)
-    
+    /// Bone White - Primary receipt/paper background
+    static let receiptBackground = BrandColors.boneWhite
+
+    /// Slightly darker paper tone for depth
+    static let receiptPaper = BrandColors.paperTint
+
+    /// Charcoal Ink - Primary text color
+    static let receiptText = BrandColors.charcoalInk
+
+    /// Sand Taupe derived - Secondary text (darker for legibility)
+    static let receiptSecondary = BrandColors.secondaryInk
+
     /// Tertiary/muted text
-    static let receiptTertiary = Color(red: 0.55, green: 0.55, blue: 0.55)
-    
-    /// Accent color for highlights
-    static let receiptAccent = Color(red: 0.85, green: 0.35, blue: 0.25) // Warm red-orange
-    
-    /// Impulse/warning color
-    static let receiptImpulse = Color(red: 0.90, green: 0.45, blue: 0.25)
-    
-    /// Success/streak color
-    static let receiptStreak = Color(red: 0.95, green: 0.60, blue: 0.20) // Golden orange
+    static let receiptTertiary = BrandColors.tertiaryInk
+
+    /// Ocean Slate - Accent color for highlights
+    static let receiptAccent = BrandColors.oceanSlate
+
+    /// Muted taupe for impulse/warning (softer than harsh orange)
+    static let receiptImpulse = BrandColors.impulseTaupe
+
+    /// Soft Sage - Success/streak color
+    static let receiptStreak = BrandColors.softSage
 }
 
 // MARK: - Receipt Divider
