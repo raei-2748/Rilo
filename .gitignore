@@ -5,3 +5,11 @@ xcuserdata/
 DerivedData/
 *.moved-aside
 *.xcuserstate
+node_modules/
+.expo/
+.expo-shared/
+web-build/
+dist/
+coverage/
+npm-debug.log*
+yarn-error.log*
