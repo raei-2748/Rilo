@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're on the list! - Rilo</title>
+  <meta name="robots" content="noindex">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'rilo': {
+              'bg': '#0F0F0F',
+              'surface': '#1A1A1A',
+              'surface-light': '#252525',
+              'accent': '#22C55E',
+              'text': '#FAFAFA',
+              'muted': '#737373',
+            }
+          },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-rilo-bg text-rilo-text font-sans antialiased min-h-screen flex items-center justify-center px-6">
+
+  <div class="max-w-md text-center">
+    <!-- Success animation -->
+    <div class="text-7xl mb-8 animate-bounce">&#127881;</div>
+
+    <h1 class="text-3xl sm:text-4xl font-bold mb-4">You're on the list!</h1>
+
+    <p class="text-lg text-rilo-muted mb-8">
+      We'll email you when Rilo is ready. In the meantime, go enjoy not stressing about money for a bit.
+    </p>
+
+    <div class="p-6 rounded-2xl bg-rilo-surface border border-rilo-surface-light mb-8">
+      <p class="text-sm text-rilo-muted mb-4">While you wait, you could:</p>
+      <ul class="text-left space-y-3">
+        <li class="flex items-start gap-3">
+          <span class="text-rilo-accent">&#10003;</span>
+          <span>Tell a mate who also struggles before payday</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-rilo-accent">&#10003;</span>
+          <span>Think about that purchase you almost made yesterday</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-rilo-accent">&#10003;</span>
+          <span>Make a cup of tea instead of buying one</span>
+        </li>
+      </ul>
+    </div>
+
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 text-rilo-muted hover:text-rilo-text transition-colors"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to homepage
+    </a>
+  </div>
+
+  <!-- Track conversion -->
+  <script src="/scripts/analytics.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof logEvent === 'function') {
+        logEvent('conversion', {
+          'event_category': 'signup',
+          'event_label': 'thank_you_page_view',
+          'value': 1
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

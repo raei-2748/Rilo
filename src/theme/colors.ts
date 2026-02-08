@@ -23,4 +23,16 @@ export const colors = {
 
     // Shadows (we'll implement these in styles, but good to have a ref)
     shadow: '#1E3A3A',
+
+    // Action-specific backgrounds (Playbook cards)
+    actionPurchased: 'rgba(74, 122, 104, 0.08)',
+    actionDelayed: 'rgba(218, 165, 32, 0.08)',
+    actionBuffered: 'rgba(30, 58, 58, 0.08)',
+    actionSwapped: 'rgba(179, 88, 72, 0.08)',
+
+    // Action-specific accents
+    purchasedAccent: '#4A7A68',
+    delayedAccent: '#DAA520',
+    bufferedAccent: '#1E3A3A',
+    swappedAccent: '#B35848',
 };

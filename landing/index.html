@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rilo - Stop screwing yourself before payday</title>
+  <meta name="description" content="Rilo gives you instant clarity on every purchase. Know if you can afford it in 10 seconds, not 10 minutes of spreadsheet anxiety.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Rilo - Stop screwing yourself before payday">
+  <meta property="og:description" content="Instant clarity on every purchase. Know if you can afford it in 10 seconds.">
+  <meta property="og:image" content="/assets/og-image.png">
+  <meta property="og:url" content="https://rilo.app">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rilo - Stop screwing yourself before payday">
+  <meta name="twitter:description" content="Instant clarity on every purchase. Know if you can afford it in 10 seconds.">
+  <meta name="twitter:image" content="/assets/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'rilo': {
+              'bg': '#0F0F0F',
+              'surface': '#1A1A1A',
+              'surface-light': '#252525',
+              'accent': '#22C55E',
+              'accent-hover': '#16A34A',
+              'text': '#FAFAFA',
+              'muted': '#737373',
+              'warning': '#EF4444',
+              'warning-soft': '#7F1D1D',
+            }
+          },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .gradient-glow {
+      background: radial-gradient(ellipse at center, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+    }
+    .card-glow {
+      box-shadow: 0 0 60px rgba(34, 197, 94, 0.1);
+    }
+  </style>
+</head>
+
+<body class="bg-rilo-bg text-rilo-text font-sans antialiased">
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col justify-center px-6 py-20 relative overflow-hidden">
+    <div class="gradient-glow absolute inset-0 pointer-events-none"></div>
+
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rilo-surface border border-rilo-surface-light mb-8">
+        <span class="w-2 h-2 bg-rilo-accent rounded-full animate-pulse"></span>
+        <span class="text-sm text-rilo-muted">Coming soon to iOS</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+        Stop screwing yourself<br>
+        <span class="text-rilo-accent">before payday.</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg sm:text-xl text-rilo-muted max-w-xl mx-auto mb-10">
+        Rilo gives you instant clarity on every purchase—so you stop making decisions you regret by Wednesday.
+      </p>
+
+      <!-- Email Signup Form -->
+      <form id="hero-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-4">
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          class="flex-1 px-5 py-4 rounded-xl bg-rilo-surface border border-rilo-surface-light text-rilo-text placeholder-rilo-muted focus:outline-none focus:border-rilo-accent transition-colors text-center sm:text-left"
+        />
+        <button
+          type="submit"
+          class="px-8 py-4 bg-rilo-accent hover:bg-rilo-accent-hover text-white font-semibold rounded-xl transition-colors whitespace-nowrap"
+        >
+          Get Early Access
+        </button>
+      </form>
+
+      <!-- Success State (hidden initially) -->
+      <div id="hero-success" class="hidden max-w-md mx-auto p-6 rounded-xl bg-rilo-surface border border-rilo-accent">
+        <div class="text-3xl mb-2">&#127881;</div>
+        <p class="font-semibold text-lg">You're on the list!</p>
+        <p class="text-rilo-muted text-sm">We'll email you when Rilo is ready.</p>
+      </div>
+
+      <!-- Microcopy -->
+      <p class="text-sm text-rilo-muted">
+        No spam. Just launch updates.
+      </p>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-rilo-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="px-6 py-24 bg-rilo-surface">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4">Sound familiar?</h2>
+      <p class="text-rilo-muted text-center mb-16 max-w-xl mx-auto">
+        You're not bad with money. You just don't have clarity when it matters.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Pain Point 1 -->
+        <div class="p-8 rounded-2xl bg-rilo-bg border border-rilo-surface-light">
+          <div class="text-4xl mb-4">&#129300;</div>
+          <h3 class="text-xl font-semibold mb-3 text-rilo-warning">"Can I actually afford this?"</h3>
+          <p class="text-rilo-muted leading-relaxed">
+            You're standing in the store, wondering if buying that $47 thing will wreck you before Friday. You guess. You're wrong.
+          </p>
+        </div>
+
+        <!-- Pain Point 2 -->
+        <div class="p-8 rounded-2xl bg-rilo-bg border border-rilo-surface-light">
+          <div class="text-4xl mb-4">&#128176;</div>
+          <h3 class="text-xl font-semibold mb-3 text-rilo-warning">"I have money... I think?"</h3>
+          <p class="text-rilo-muted leading-relaxed">
+            Your balance says $340, but rent autodrafts Thursday. Subscriptions hit randomly. Buffer? What buffer?
+          </p>
+        </div>
+
+        <!-- Pain Point 3 -->
+        <div class="p-8 rounded-2xl bg-rilo-bg border border-rilo-surface-light">
+          <div class="text-4xl mb-4">&#128260;</div>
+          <h3 class="text-xl font-semibold mb-3 text-rilo-warning">"Same mistake, different month"</h3>
+          <p class="text-rilo-muted leading-relaxed">
+            Every month, the same pattern. Spend early, panic late. You know better. But in the moment? You don't.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="px-6 py-24">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4">What if you just... knew?</h2>
+      <p class="text-rilo-muted text-center mb-16 max-w-xl mx-auto">
+        Rilo gives you clarity in two ways. Both take less than 10 seconds.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Value Prop 1 -->
+        <div class="p-10 rounded-2xl bg-rilo-surface border border-rilo-surface-light">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rilo-accent/10 text-rilo-accent text-sm font-medium mb-6">
+            <span>&#9889;</span> Instant Answer
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Can I Afford It?</h3>
+          <p class="text-rilo-muted leading-relaxed mb-6">
+            Type in the amount. See your <em>actual</em> safe-to-spend number. Get a clear recommendation: proceed, delay, or swap.
+          </p>
+          <ul class="space-y-3 text-rilo-muted">
+            <li class="flex items-start gap-3">
+              <span class="text-rilo-accent mt-1">&#10003;</span>
+              <span>No budgeting app needed</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rilo-accent mt-1">&#10003;</span>
+              <span>No spreadsheet anxiety</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rilo-accent mt-1">&#10003;</span>
+              <span>Just the answer, in 10 seconds</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Value Prop 2 -->
+        <div class="p-10 rounded-2xl bg-rilo-surface border border-rilo-surface-light">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rilo-accent/10 text-rilo-accent text-sm font-medium mb-6">
+            <span>&#128214;</span> Your Patterns
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Your Playbook</h3>
+          <p class="text-rilo-muted leading-relaxed mb-6">
+            Every decision you make gets saved. See what triggers stress spending. Notice when delaying 24 hours saved you.
+          </p>
+          <ul class="space-y-3 text-rilo-muted">
+            <li class="flex items-start gap-3">
+              <span class="text-rilo-accent mt-1">&#10003;</span>
+              <span>Track your decision patterns</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rilo-accent mt-1">&#10003;</span>
+              <span>See what actually works for you</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-rilo-accent mt-1">&#10003;</span>
+              <span>Build habits that stick</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spending Roast Teaser -->
+  <section class="px-6 py-24 bg-rilo-surface">
+    <div class="max-w-3xl mx-auto">
+      <div class="p-10 rounded-2xl bg-gradient-to-br from-rilo-bg to-rilo-surface-light border border-rilo-surface-light card-glow relative overflow-hidden">
+        <!-- Beta badge -->
+        <div class="absolute top-6 right-6">
+          <span class="px-3 py-1 rounded-full bg-rilo-warning/20 text-rilo-warning text-xs font-semibold uppercase tracking-wider">
+            Coming Soon
+          </span>
+        </div>
+
+        <div class="text-5xl mb-6">&#128293;</div>
+        <h3 class="text-2xl sm:text-3xl font-bold mb-4">Spending Roast</h3>
+        <p class="text-rilo-muted text-lg leading-relaxed mb-6">
+          Connect your bank (optional). Get a brutally honest breakdown of your spending patterns. We'll tell you what your receipts already know about you.
+        </p>
+        <p class="text-rilo-muted italic mb-8">
+          "You spent $47 at 7-Eleven at 2am on a Tuesday. Buddy, that's a cry for help."
+        </p>
+        <a
+          href="#final-cta"
+          onclick="trackRoastInterest()"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-rilo-surface-light hover:bg-rilo-bg border border-rilo-surface-light transition-colors font-medium"
+        >
+          <span>&#128293;</span> Roast me when it's ready
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof Placeholder -->
+  <section class="px-6 py-24">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="p-8 rounded-2xl bg-rilo-surface border border-rilo-surface-light">
+        <div class="text-4xl mb-4">&#128172;</div>
+        <blockquote class="text-xl sm:text-2xl font-medium italic mb-4">
+          "Finally, an app that doesn't make me feel like garbage for not knowing how money works."
+        </blockquote>
+        <p class="text-rilo-muted">— Future Rilo User (we hope that's you)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section id="final-cta" class="px-6 py-24 bg-rilo-surface">
+    <div class="max-w-xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">Ready to stop guessing?</h2>
+      <p class="text-rilo-muted mb-10">
+        Get early access to Rilo. Be first to know when we launch.
+      </p>
+
+      <!-- Email Signup Form (repeated) -->
+      <form id="footer-form" class="flex flex-col sm:flex-row gap-3 mb-4">
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          class="flex-1 px-5 py-4 rounded-xl bg-rilo-bg border border-rilo-surface-light text-rilo-text placeholder-rilo-muted focus:outline-none focus:border-rilo-accent transition-colors text-center sm:text-left"
+        />
+        <button
+          type="submit"
+          class="px-8 py-4 bg-rilo-accent hover:bg-rilo-accent-hover text-white font-semibold rounded-xl transition-colors whitespace-nowrap"
+        >
+          Get Early Access
+        </button>
+      </form>
+
+      <!-- Success State (hidden initially) -->
+      <div id="footer-success" class="hidden p-6 rounded-xl bg-rilo-bg border border-rilo-accent">
+        <div class="text-3xl mb-2">&#127881;</div>
+        <p class="font-semibold text-lg">You're on the list!</p>
+        <p class="text-rilo-muted text-sm">We'll email you when Rilo is ready.</p>
+      </div>
+
+      <p class="text-sm text-rilo-muted">
+        iOS first. Android coming. No credit card required. Ever.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="px-6 py-12 border-t border-rilo-surface">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+      <div class="text-rilo-muted text-sm">
+        &copy; 2026 Rilo. Made in Australia.
+      </div>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="#pricing" onclick="trackPricingIntent()" class="text-rilo-muted hover:text-rilo-text transition-colors">
+          Pricing
+        </a>
+        <a href="mailto:hello@rilo.app" class="text-rilo-muted hover:text-rilo-text transition-colors">
+          Contact
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Analytics Script -->
+  <script src="/scripts/analytics.js"></script>
+
+  <!-- Form Handling -->
+  <script>
+    // Buttondown endpoint - replace 'rilo' with your actual username
+    const BUTTONDOWN_ENDPOINT = 'https://buttondown.com/api/emails/embed-subscribe/rilo';
+
+    async function handleSubmit(formId, successId, source) {
+      const form = document.getElementById(formId);
+      const successDiv = document.getElementById(successId);
+      const email = form.querySelector('input[name="email"]').value;
+
+      try {
+        // Track signup attempt
+        if (typeof trackSignup === 'function') {
+          trackSignup(source);
+        }
+
+        // Submit to Buttondown
+        const response = await fetch(BUTTONDOWN_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `email=${encodeURIComponent(email)}&tag=landing-page-${source}`
+        });
+
+        // Show success state
+        form.classList.add('hidden');
+        successDiv.classList.remove('hidden');
+
+      } catch (error) {
+        console.error('Signup failed:', error);
+        // Fallback: open Buttondown in new tab
+        window.open(`https://buttondown.com/rilo?email=${encodeURIComponent(email)}`, '_blank');
+      }
+    }
+
+    document.getElementById('hero-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleSubmit('hero-form', 'hero-success', 'hero');
+    });
+
+    document.getElementById('footer-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleSubmit('footer-form', 'footer-success', 'footer');
+    });
+  </script>
+
+</body>
+</html>

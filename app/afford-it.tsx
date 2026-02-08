@@ -17,7 +17,7 @@ import Animated, {
     useSharedValue,
     useAnimatedStyle,
     withTiming,
-    RunOnJS
+    runOnJS
 } from 'react-native-reanimated';
 
 import { colors } from '../src/theme/colors';
@@ -40,11 +40,11 @@ import { ScaleButton } from '../src/components/ScaleButton';
 import { AnimatedNumber } from '../src/components/AnimatedNumber';
 import { FadeInText } from '../src/components/FadeInText';
 
-type Step = 'input' | 'result' | 'relief';
+type Step = 'input' | 'result' | 'relief' | 'saving';
 
 export default function AffordItScreen() {
     const router = useRouter();
-    const addCard = usePlaybookStore((s) => s.addCard);
+    const { addCard } = usePlaybookStore();
     const {
         currentPulse,
         setStressBefore,
@@ -122,16 +122,18 @@ export default function AffordItScreen() {
     const handleComplete = () => {
         if (!result || !chosenAction) return;
 
-        // 1. Success Haptic
+        // 1. Show Success State first
+        setStep('saving');
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
-        // 2. Animate Opacity -> 0
-        containerOpacity.value = withTiming(0, { duration: 250 }, (finished) => {
-            if (finished) {
-                // 3. Save and Exit after animation
-                Animated.runOnJS(performSave)();
-            }
-        });
+        // 2. Wait, then animate out
+        setTimeout(() => {
+            containerOpacity.value = withTiming(0, { duration: 300 }, (finished) => {
+                if (finished) {
+                    runOnJS(performSave)();
+                }
+            });
+        }, 800);
     };
 
     const animatedContainerStyle = useAnimatedStyle(() => ({
@@ -160,15 +162,18 @@ export default function AffordItScreen() {
                         <Animated.View entering={FadeIn.duration(300)}>
                             <View style={styles.section}>
                                 {/* Oversized Amount Input */}
-                                <TextInput
-                                    style={styles.amountInput}
-                                    value={amount}
-                                    onChangeText={setAmount}
-                                    placeholder="$0"
-                                    keyboardType="decimal-pad"
-                                    placeholderTextColor={colors.borderStrong}
-                                    autoFocus={true}
-                                />
+                                <View style={styles.amountContainer}>
+                                    <Text style={styles.amountPrefix}>$</Text>
+                                    <TextInput
+                                        style={styles.amountInput}
+                                        value={amount}
+                                        onChangeText={setAmount}
+                                        placeholder="0"
+                                        keyboardType="decimal-pad"
+                                        placeholderTextColor={colors.borderStrong}
+                                        autoFocus={true}
+                                    />
+                                </View>
                                 <Text style={styles.inputHelper}>Enter amount</Text>
 
                                 {/* Live Preview - Premium Style */}
@@ -329,51 +334,12 @@ export default function AffordItScreen() {
 
                     {step === 'relief' && (
                         <Animated.View entering={FadeInDown.duration(400).springify()} style={styles.section}>
+                            {/* Updated 5-step Mood Selectors */}
                             <Text style={styles.reliefQuestion}>Stress level before?</Text>
-                            <View style={styles.stressRow}>
-                                {[0, 2, 4, 6, 8, 10].map((val) => (
-                                    <Pressable
-                                        key={val}
-                                        style={[
-                                            styles.stressButton,
-                                            currentPulse?.before === val && styles.stressSelected,
-                                        ]}
-                                        onPress={() => setStressBefore(val)}
-                                    >
-                                        <Text
-                                            style={[
-                                                styles.stressText,
-                                                currentPulse?.before === val && styles.stressTextSelected,
-                                            ]}
-                                        >
-                                            {val}
-                                        </Text>
-                                    </Pressable>
-                                ))}
-                            </View>
+                            <MoodSelector value={currentPulse?.before} onChange={setStressBefore} />
 
                             <Text style={styles.reliefQuestion}>Stress level now?</Text>
-                            <View style={styles.stressRow}>
-                                {[0, 2, 4, 6, 8, 10].map((val) => (
-                                    <Pressable
-                                        key={val}
-                                        style={[
-                                            styles.stressButton,
-                                            currentPulse?.after === val && styles.stressSelected,
-                                        ]}
-                                        onPress={() => setStressAfter(val)}
-                                    >
-                                        <Text
-                                            style={[
-                                                styles.stressText,
-                                                currentPulse?.after === val && styles.stressTextSelected,
-                                            ]}
-                                        >
-                                            {val}
-                                        </Text>
-                                    </Pressable>
-                                ))}
-                            </View>
+                            <MoodSelector value={currentPulse?.after} onChange={setStressAfter} />
 
                             <Text style={styles.reliefQuestion}>What helped?</Text>
                             <View style={styles.tagsContainer}>
@@ -405,9 +371,49 @@ export default function AffordItScreen() {
                             </ScaleButton>
                         </Animated.View>
                     )}
+
+                    {step === 'saving' && (
+                        <Animated.View entering={FadeIn.duration(300)} style={styles.centerContainer}>
+                            <View style={styles.successIcon}>
+                                <Text style={styles.successCheck}>✓</Text>
+                            </View>
+                            <Text style={styles.successText}>Saved to Playbook</Text>
+                        </Animated.View>
+                    )}
                 </ScrollView>
             </Animated.View>
         </KeyboardAvoidingView>
+    );
+}
+
+// 5-level mood scale
+const MOOD_LEVELS = [
+    { value: 0, label: 'Calm', emoji: '😌' },
+    { value: 3, label: 'Okay', emoji: '🙂' },
+    { value: 5, label: 'Uneasy', emoji: '😐' },
+    { value: 8, label: 'Stressed', emoji: '😰' },
+    { value: 10, label: 'Panic', emoji: '🤯' },
+];
+
+function MoodSelector({ value, onChange }: { value: number | undefined, onChange: (v: number) => void }) {
+    return (
+        <View style={styles.moodContainer}>
+            {MOOD_LEVELS.map((level) => {
+                const isSelected = value === level.value;
+                return (
+                    <Pressable
+                        key={level.value}
+                        style={[styles.moodButton, isSelected && styles.moodSelected]}
+                        onPress={() => onChange(level.value)}
+                    >
+                        <Text style={styles.moodEmoji}>{level.emoji}</Text>
+                        <Text style={[styles.moodLabel, isSelected && styles.moodLabelSelected]}>
+                            {level.label}
+                        </Text>
+                    </Pressable>
+                );
+            })}
+        </View>
     );
 }
 
@@ -456,11 +462,24 @@ const styles = StyleSheet.create({
     section: {
         marginBottom: 24,
     },
+    amountContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 8,
+    },
+    amountPrefix: {
+        fontSize: 56,
+        fontWeight: '300',
+        color: colors.text,
+        marginRight: 4,
+    },
     amountInput: {
         fontSize: 56, // Massive input
         fontWeight: '300',
         color: colors.text,
-        textAlign: 'center',
+        minWidth: 60,
+        textAlign: 'left',
         paddingVertical: 10,
     },
     inputHelper: {
@@ -748,6 +767,62 @@ const styles = StyleSheet.create({
     },
     helpTagTextSelected: {
         color: colors.accent,
+        fontWeight: '600',
+    },
+
+    // Mood Selector Details
+    moodContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 32,
+    },
+    moodButton: {
+        alignItems: 'center',
+        opacity: 0.5,
+        padding: 8,
+    },
+    moodSelected: {
+        opacity: 1,
+        transform: [{ scale: 1.1 }],
+    },
+    moodEmoji: {
+        fontSize: 32,
+        marginBottom: 8,
+    },
+    moodLabel: {
+        fontSize: 12,
+        color: colors.secondary,
+        fontWeight: '500',
+    },
+    moodLabelSelected: {
+        color: colors.accent,
+        fontWeight: '700',
+    },
+
+    // Success State
+    centerContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 100,
+    },
+    successIcon: {
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        backgroundColor: colors.success,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 24,
+    },
+    successCheck: {
+        color: '#FFFFFF',
+        fontSize: 40,
+        fontWeight: 'bold',
+    },
+    successText: {
+        fontSize: 24,
+        color: colors.text,
         fontWeight: '600',
     },
 });
